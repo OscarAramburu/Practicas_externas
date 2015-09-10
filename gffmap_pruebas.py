@@ -28,7 +28,16 @@ for line in grch37:
 
         posiciones['direccion']=direccion
 
-        
+        anotaciones = line.split(sep='\t')[8]
+
+        target = anotaciones.split(sep=';')[1]
+
+        target1 = target.replace('Target=','')
+
+        target2 = target1.split(sep=' ')
+
+        print(target2)
+        break
 
        
 print(list(mapeo.items())[:1])
