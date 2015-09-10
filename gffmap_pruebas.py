@@ -24,10 +24,14 @@ for line in grch37:
 
         mapeo[ident].append(posiciones)
 
+        direccion = line.split(sep='\t')[6]
+
+        posiciones['direccion']=direccion
+
         
 
        
-print(list(mapeo.items())[:20])
+print(list(mapeo.items())[:1])
     
 grch37.close()
 
