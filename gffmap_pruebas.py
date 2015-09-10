@@ -34,9 +34,22 @@ for line in grch37:
 
         target1 = target.replace('Target=','')
 
-        target2 = target1.split(sep=' ')
+        identd, iniciod, find, direcciond = target1.split(sep=' ')
+        
+        destino={}
+        
+        destino['identificador']=identd
+        
+        destino['inicio']=iniciod
+        
+        destino['fin']=find
+        
+        destino['direccion']=direcciond
 
-        print(target2)
+        posiciones['destino']=destino
+        
+
+        print(posiciones)
         break
 
        
