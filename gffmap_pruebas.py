@@ -84,8 +84,12 @@ def remap(cromosoma, posicion):
 
             if posicion >= segmento['inicio'] and posicion <= segmento['fin']:
 
-                print(posicion)
+                destino = (segmento['destino']['inicio'],
+                           segmento['destino']['fin'],
+                           segmento['destino']['identificador'])
+                           
+                return destino
 
         
 
-remap('NW_003315958.1', 112852)
+print(remap('NW_003315958.1', 112852))
