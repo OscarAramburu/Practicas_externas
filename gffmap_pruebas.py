@@ -24,9 +24,9 @@ def parse_line(data):
 
     posiciones['ident']=ident
 
-    posiciones['inicio']=inicio
+    posiciones['inicio']=int(inicio)
 
-    posiciones['fin']=fin
+    posiciones['fin']=int(fin)
 
     direccion = data[6]
 
@@ -44,9 +44,9 @@ def parse_line(data):
 
     destino['identificador']=identd
 
-    destino['inicio']=iniciod
+    destino['inicio']=int(iniciod)
 
-    destino['fin']=find
+    destino['fin']=int(find)
 
     destino['direccion']=direcciond
 
