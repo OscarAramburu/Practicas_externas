@@ -4,8 +4,49 @@ grch37= open('GRCh37-GRCh38.gff', 'r')
 
 identificadores = []
 
-mapeo = {}
 
+
+def parse_line(data):
+    
+    posiciones={}
+ 
+    ident = data[0]
+
+    inicio, fin = data[3:5]
+
+    posiciones['ident']=ident
+    
+    posiciones['inicio']=inicio
+
+    posiciones['fin']=fin
+    
+    direccion = data[6]
+
+    posiciones['direccion']=direccion
+
+    anotaciones = data[8]
+
+    target = anotaciones.split(sep=';')[1]
+
+    target1 = target.replace('Target=','')
+
+    identd, iniciod, find, direcciond = target1.split(sep=' ')
+
+    destino={}
+
+    destino['identificador']=identd
+
+    destino['inicio']=iniciod
+
+    destino['fin']=find
+
+    destino['direccion']=direcciond
+
+    posiciones['destino']=destino
+
+    return posiciones
+
+mapeo = {}
 
 for line in grch37:
 
@@ -13,56 +54,18 @@ for line in grch37:
 
     if not line.startswith('#'):
 
-        ident = data[0]
+        posiciones = parse_line(data)
 
-        if ident not in mapeo:
+        ident = posiciones['ident']
+
+        if not ident in mapeo:
 
             mapeo[ident] = []
 
-        inicio, fin = data[3:5]
-
-        posiciones={}
-
-        posiciones['inicio']=inicio
-
-        posiciones['fin']=fin
-
         mapeo[ident].append(posiciones)
-
-        direccion = data[6]
-
-        posiciones['direccion']=direccion
-
-        anotaciones = data[8]
-
-        target = anotaciones.split(sep=';')[1]
-
-        target1 = target.replace('Target=','')
-
-        identd, iniciod, find, direcciond = target1.split(sep=' ')
-
-        destino={}
-
-        destino['identificador']=identd
-
-        destino['inicio']=iniciod
-
-        destino['fin']=find
-
-        destino['direccion']=direcciond
-
-        posiciones['destino']=destino
+    
 
 
-        print(mapeo)
-        break
-
-
-print(list(mapeo.items())[:1])
-
-grch37.close()
-
-
-print(identificadores[:20])
+print(list(mapeo.items())[:5])
 
 grch37.close()
