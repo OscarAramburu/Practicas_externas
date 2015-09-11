@@ -1,21 +1,25 @@
 """Esto hace tal cosa."""
+
 grch37= open('GRCh37-GRCh38.gff', 'r')
 
 identificadores = []
 
 mapeo = {}
 
+
 for line in grch37:
+
+    data = line.split(sep='\t')
 
     if not line.startswith('#'):
 
-        ident = line.split(sep='\t')[0]
+        ident = data[0]
 
         if ident not in mapeo:
 
             mapeo[ident] = []
 
-        inicio, fin = line.split(sep='\t')[3:5]
+        inicio, fin = data[3:5]
 
         posiciones={}
 
@@ -25,11 +29,11 @@ for line in grch37:
 
         mapeo[ident].append(posiciones)
 
-        direccion = line.split(sep='\t')[6]
+        direccion = data[6]
 
         posiciones['direccion']=direccion
 
-        anotaciones = line.split(sep='\t')[8]
+        anotaciones = data[8]
 
         target = anotaciones.split(sep=';')[1]
 
@@ -50,7 +54,7 @@ for line in grch37:
         posiciones['destino']=destino
 
 
-        print(posiciones)
+        print(mapeo)
         break
 
 
