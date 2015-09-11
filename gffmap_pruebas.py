@@ -72,6 +72,20 @@ for line in grch37:
 
         mapeo[ident].append(posiciones)
 
-print(list(mapeo.items())[:5])
-
 grch37.close()
+
+
+"""====================================="""
+def remap(cromosoma, posicion):
+
+    if cromosoma in mapeo:
+
+        for segmento in mapeo[cromosoma]:
+
+            if posicion >= segmento['inicio'] and posicion <= segmento['fin']:
+
+                print(posicion)
+
+        
+
+remap('NW_003315958.1', 112852)
