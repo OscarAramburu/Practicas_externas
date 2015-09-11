@@ -6,20 +6,28 @@ identificadores = []
 
 def parse_line(data):
 
-    """Selecciona una linea y parsea"""
-    
+    """Recive una linea y parsea a un diccionario.
+
+    >>> parse_line(["NT_187509.1", "RefSeq", "match", "3463", "10794", ".", "+",
+    ".", "ID=aln4;Target=NT_113885.1 68285 75572 +;"])
+    {"ident": "NT_187509.1", "inicio": "3463", "fin": "10794", "direccion": "+",
+     {"identificador": "NT_113885.1", "inicio": "68285", "fin": "75572",
+      "direccion": "+"}
+
+    """
+
     posiciones={}
- 
+
     ident = data[0]
 
     inicio, fin = data[3:5]
 
     posiciones['ident']=ident
-    
+
     posiciones['inicio']=inicio
 
     posiciones['fin']=fin
-    
+
     direccion = data[6]
 
     posiciones['direccion']=direccion
@@ -63,7 +71,7 @@ for line in grch37:
             mapeo[ident] = []
 
         mapeo[ident].append(posiciones)
-    
+
 print(list(mapeo.items())[:5])
 
 grch37.close()
