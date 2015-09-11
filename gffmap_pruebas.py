@@ -4,9 +4,9 @@ grch37= open('GRCh37-GRCh38.gff', 'r')
 
 identificadores = []
 
-
-
 def parse_line(data):
+
+    """Selecciona una linea y parsea"""
     
     posiciones={}
  
@@ -64,8 +64,6 @@ for line in grch37:
 
         mapeo[ident].append(posiciones)
     
-
-
 print(list(mapeo.items())[:5])
 
 grch37.close()
