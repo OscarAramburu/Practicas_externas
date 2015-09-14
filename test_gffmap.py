@@ -14,6 +14,7 @@ def test_parse_line():
         'inicio': 3463,
         'fin': 10794,
         'direccion': "+",
+        'gap': 'M62 D47 M3126 I4 M725 D1 M3371',
         'destino': {'identificador': 'NT_113885.1',
                     'inicio': 68285,
                     'fin': 75572,

@@ -34,10 +34,20 @@ def parse_line(data):
 
     anotaciones = data[8]
 
-    target = anotaciones.split(sep=';')[1]
+    target = anotaciones.split(sep=';')
 
-    target1 = target.replace('Target=','')
+    target1 = target[1].replace('Target=','')
 
+    gap=None
+    
+    for anotacion in target:
+
+        if anotacion.startswith('Gap='):
+        
+            gap = anotacion.replace('Gap=','')
+
+    posiciones['gap'] = gap
+            
     identd, iniciod, find, direcciond = target1.split(sep=' ')
 
     destino={}
@@ -51,6 +61,8 @@ def parse_line(data):
     destino['direccion']=direcciond
 
     posiciones['destino']=destino
+
+    
 
     return posiciones
 
