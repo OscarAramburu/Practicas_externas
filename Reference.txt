@@ -1,0 +1,35 @@
+THE GAP ATTRIBUTE
+-----------------
+
+Protein and nucleotide alignment features typically consist of two
+sequences, the reference sequence and the "target", and are not always
+colinear.  For example, consider the following alignment between an
+EST ("EST23") and a segment of the genome ("Chr3"):
+
+        Chr3  (reference)  1 CAAGACCTAAACTGGAT-TCCAAT  23
+        EST23 (target)     1 CAAGACCT---CTGGATATCCAAT  21
+
+Previous versions of the GFF format would represent this alignment as
+three colinear segments, but this made it difficult to reconstruct the
+gapped alignment.  GFF3 recommends representing gapped alignments
+explicitly with the "Gap" attribute.  The Gap attribute's format
+consists of a series of (operation,length) pairs separated by spac
+characters, for example "M8 D3 M6".  Each operation is a single-letter
+code:
+
+       Code      Operation
+       ----      ---------
+
+        M        match
+        I        insert a gap into the reference sequence
+        D        insert a gap into the target (delete from reference)
+        F        frameshift forward in the reference sequence
+        R        frameshift reverse in the reference sequence
+
+In the alignment between EST23 and Chr3 shown above, Chr3 is the
+reference sequence referred to in the first column of the GFF3 file,
+and EST23 is the sequence referred to by the Target attribute.  This
+gives a Gap string of "M8 D3 M6 I1 M6". The full GFF match line will
+read:
+
+   Chr23 . Match 1 23 . . . ID=Match1;Target=EST23 1 21;Gap=M8 D3 M6 I1 M6
