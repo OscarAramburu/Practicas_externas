@@ -84,11 +84,17 @@ def remap(cromosoma, posicion):
 
             if posicion >= segmento['inicio'] and posicion <= segmento['fin']:
 
-                destino = (segmento['destino']['inicio'],
-                           segmento['destino']['fin'],
-                           segmento['destino']['identificador'])
-                           
+                pos_inicio = posicion - segmento['inicio']
+
+                posicion_final = pos_inicio + segmento['destino']['inicio']
+
+                destino = (segmento['destino']['identificador'],
+                           posicion_final)
+    
+                       
                 return destino
+
+
 
         
 
