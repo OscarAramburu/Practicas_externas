@@ -22,10 +22,12 @@ def test_parse_line():
                     'fin': 75572,
                     'direccion': '+'}}
 
+
 def test_remap():
+    """Test remap is doing the right sums."""
 
     mapeo = {
-        'NT_187509.1':[{
+        'NT_187509.1': [{
             'ident': "NT_187509.1",
             'inicio': 3463,
             'fin': 10794,
@@ -41,6 +43,6 @@ def test_remap():
     assert remap('NT_187509.1', 3463, mapeo) == ('NT_113885.1', 68285)
     assert remap('NT_187509.1', 10794, mapeo) == ('NT_113885.1', 75572)
     # Las posiciones que caen en un D deben devolver NULL.
-    assert remap('NT_187509.1', 3525, mapeo) == None
+    assert remap('NT_187509.1', 3525, mapeo) is None
     # Valor mapeado en una insercion
     assert remap('NT_187509.1', 3236, mapeo) == ('NT_113885.1', 68058)
