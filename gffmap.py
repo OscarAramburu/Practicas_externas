@@ -66,6 +66,25 @@ def parse_line(data):
 
     return posiciones
 
+
+def remap(cromosoma, posicion, mapeo):
+
+    if cromosoma in mapeo:
+
+        for segmento in mapeo[cromosoma]:
+
+            if posicion >= segmento['inicio'] and posicion <= segmento['fin']:
+
+                pos_inicio = posicion - segmento['inicio']
+
+                posicion_final = pos_inicio + segmento['destino']['inicio']
+
+                destino = (segmento['destino']['identificador'],
+                           posicion_final)
+    
+                       
+                return destino
+
 mapeo = {}
 
 for line in grch37:
@@ -87,27 +106,4 @@ for line in grch37:
 grch37.close()
 
 
-"""====================================="""
-def remap(cromosoma, posicion):
-
-    if cromosoma in mapeo:
-
-        for segmento in mapeo[cromosoma]:
-
-            if posicion >= segmento['inicio'] and posicion <= segmento['fin']:
-
-                pos_inicio = posicion - segmento['inicio']
-
-                posicion_final = pos_inicio + segmento['destino']['inicio']
-
-                destino = (segmento['destino']['identificador'],
-                           posicion_final)
-    
-                       
-                return destino
-
-
-
-        
-
-print(remap('NW_003315958.1', 112852))
+print(remap('NW_003315958.1', 112852, mapeo))
