@@ -37,7 +37,10 @@ def test_remap():
                         'direccion': '+'}}]}
 
     assert remap('NT_187509.1', 4000, mapeo) == ('NT_113885.1', 68775)
-    assert remap('NT_187509.1', 3463, mapeo) == ('NT_113885.1', 68285)    
+    # Valor mapeado en una zona limite.
+    assert remap('NT_187509.1', 3463, mapeo) == ('NT_113885.1', 68285)
     assert remap('NT_187509.1', 10794, mapeo) == ('NT_113885.1', 75572)
     # Las posiciones que caen en un D deben devolver NULL.
     assert remap('NT_187509.1', 3525, mapeo) == None
+    # Valor mapeado en una insercion
+    assert remap('NT_187509.1', 3236, mapeo) == ('NT_113885.1', 68058)
