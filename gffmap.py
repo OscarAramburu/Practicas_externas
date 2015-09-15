@@ -96,21 +96,14 @@ def remap(cromosoma, posicion, mapeo):
 
                             shift = shift + int(tramo[1:])
 
-                desplazamiento = posicion-segmento['inicio']+shift
-
-                
+                desplazamiento = posicion-segmento['inicio']+shift            
             
-                #pos_inicio = posicion - segmento['inicio']
-
+                
                 posicion_final = segmento['destino']['inicio'] + desplazamiento
                                  
-
-            
-
                 destino = (segmento['destino']['identificador'],
                            posicion_final)
-    
-                       
+          
                 return destino
 
 mapeo = {}
