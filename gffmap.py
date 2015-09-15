@@ -44,7 +44,7 @@ def parse_line(data):
 
         if anotacion.startswith('Gap='):
         
-            gap = anotacion.replace('Gap=','')
+            gap = anotacion.replace('Gap=','').rstrip()
 
     posiciones['gap'] = gap
             
@@ -75,9 +75,37 @@ def remap(cromosoma, posicion, mapeo):
 
             if posicion >= segmento['inicio'] and posicion <= segmento['fin']:
 
-                pos_inicio = posicion - segmento['inicio']
+                gap = segmento["gap"].split(sep=' ')
+                
+                shift = 0
+                limit = 0
 
-                posicion_final = pos_inicio + segmento['destino']['inicio']
+                for tramo in gap:
+
+                    if limit <= (posicion-segmento['inicio']):
+
+                        if tramo.startswith('M') or tramo.startswith('D'):                        
+
+                            limit = limit + int(tramo[1:])
+
+                            if tramo.startswith('D'):
+
+                                shift = shift - int(tramo[1:])
+
+                        elif tramo.startswith('I') :
+
+                            shift = shift + int(tramo[1:])
+
+                desplazamiento = posicion-segmento['inicio']+shift
+
+                
+            
+                #pos_inicio = posicion - segmento['inicio']
+
+                posicion_final = segmento['destino']['inicio'] + desplazamiento
+                                 
+
+            
 
                 destino = (segmento['destino']['identificador'],
                            posicion_final)

@@ -36,4 +36,4 @@ def test_remap():
                         'fin': 75572,
                         'direccion': '+'}}]}
 
-    assert remap('NT_187509.1', 4000, mapeo) == ('NT_113885.1', 3953)
+    assert remap('NT_187509.1', 4000, mapeo) == ('NT_113885.1', 68775)
