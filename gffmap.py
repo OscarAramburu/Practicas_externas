@@ -98,7 +98,6 @@ def remap(cromosoma, posicion, mapeo):
 
                 return destino
 
-
 if __name__ == "__main__":
     MAPEO = {}
 
@@ -113,3 +112,4 @@ if __name__ == "__main__":
                 if not ident in MAPEO:
                     MAPEO[ident] = []
                     MAPEO[ident].append(posiciones)
+#Test
