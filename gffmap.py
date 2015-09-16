@@ -46,6 +46,30 @@ def parse_line(data):
 
     return posiciones
 
+def calcular_shift(gap, despl):
+
+    shift = 0
+    limit = 0
+    
+    for tramo in gap.split(sep=' '):
+        
+        if limit <= despl:
+            if tramo.startswith('M') or tramo.startswith('D'):
+                limit = limit + int(tramo[1:])
+
+                if tramo.startswith('D'):
+                    shift = shift - int(tramo[1:])
+
+            elif tramo.startswith('I'):
+                shift = shift + int(tramo[1:])
+
+            tramo_anterior = tramo
+
+        else:
+            if tramo_anterior.startswith('D'):
+                return None
+
+    return shift
 
 def remap(cromosoma, posicion, mapeo):
     """Devuelve la posicion de mapeo para cromosoma y posicion."""

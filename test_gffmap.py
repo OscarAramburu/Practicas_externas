@@ -3,6 +3,7 @@ from gffmap import parse_line
 
 from gffmap import remap
 
+from gffmap import calcular_shift
 
 def test_parse_line():
     """Test the GFF parser."""
@@ -71,3 +72,9 @@ def remap_reverse():
     assert remap('NT_187499.1', 72412, mapeo) == ('NT_113888.1', 61895)
     # Las posiciones que caen en un D deben devolver NULL.
     assert remap('NT_187499.1', 77996, mapeo) is None
+
+def test_calcular_shift():
+    gap='M62 D47 M3126 I4 M725 D1 M3371'
+
+    assert calcular_shift(gap, 4000-3463)== (-47)
+    assert calcular_shift(gap, 3525-3463)== (None)
