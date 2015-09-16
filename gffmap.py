@@ -70,6 +70,13 @@ def remap(cromosoma, posicion, mapeo):
                         elif tramo.startswith('I'):
                             shift = shift + int(tramo[1:])
 
+                        tramo_anterior = tramo
+
+                    else:
+                        if tramo_anterior.startswith('D'):
+                            return None
+                        
+
                 ############################################################
 
                 desplazamiento = posicion - segmento['inicio'] + shift

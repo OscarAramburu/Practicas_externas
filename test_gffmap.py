@@ -45,10 +45,10 @@ def test_remap():
     # Las posiciones que caen en un D deben devolver NULL.
     assert remap('NT_187509.1', 3525, mapeo) is None
     # Valor mapeado en una insercion
-    assert remap('NT_187509.1', 3236, mapeo) == ('NT_113885.1', 68058)
+    assert remap('NT_187509.1', 6700, mapeo) == ('NT_113885.1', 71479)
 
 
-def test_remap_reverse():
+def remap_reverse():
     """Test reversed segments are correctly calculated."""
     mapeo = {
         "NT_187499.1": [{
