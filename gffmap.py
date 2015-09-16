@@ -46,13 +46,15 @@ def parse_line(data):
 
     return posiciones
 
+
 def calcular_shift(gap, despl):
+    """Calcula el desplazamiento con inserciones y deleciones."""
 
     shift = 0
     limit = 0
-    
+
     for tramo in gap.split(sep=' '):
-        
+
         if limit <= despl:
             if tramo.startswith('M') or tramo.startswith('D'):
                 limit = limit + int(tramo[1:])
@@ -71,6 +73,7 @@ def calcular_shift(gap, despl):
 
     return shift
 
+
 def remap(cromosoma, posicion, mapeo):
     """Devuelve la posicion de mapeo para cromosoma y posicion."""
 
@@ -80,18 +83,20 @@ def remap(cromosoma, posicion, mapeo):
 
                 gap = segmento["gap"]
 
-                shift = calcular_shift(gap,posicion-segmento['inicio'])
+                shift = calcular_shift(gap, posicion - segmento['inicio'])
 
-                if shift == None:
+                if shift is None:
                     return None
 
                 desplazamiento = posicion - segmento['inicio'] + shift
                 if segmento['destino']['direccion'] == '-':
-                    posicion_final = segmento['destino']['fin'] - desplazamiento
+                    posicion_final = segmento['destino']['fin'] -\
+                        desplazamiento
 
                 else:
 
-                    posicion_final = segmento['destino']['inicio'] + desplazamiento
+                    posicion_final = segmento['destino']['inicio'] +\
+                        desplazamiento
 
                 destino = (segmento['destino']['identificador'],
                            posicion_final)
