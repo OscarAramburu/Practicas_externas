@@ -49,7 +49,7 @@ def test_remap():
     assert remap('NT_187509.1', 6700, mapeo) == ('NT_113885.1', 71479)
 
 
-def remap_reverse():
+def test_remap_reverse():
     """Test reversed segments are correctly calculated."""
     mapeo = {
         "NT_187499.1": [{

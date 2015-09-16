@@ -86,7 +86,12 @@ def remap(cromosoma, posicion, mapeo):
                     return None
 
                 desplazamiento = posicion - segmento['inicio'] + shift
-                posicion_final = segmento['destino']['inicio'] + desplazamiento
+                if segmento['destino']['direccion'] == '-':
+                    posicion_final = segmento['destino']['fin'] - desplazamiento
+
+                else:
+
+                    posicion_final = segmento['destino']['inicio'] + desplazamiento
 
                 destino = (segmento['destino']['identificador'],
                            posicion_final)
