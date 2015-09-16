@@ -78,30 +78,12 @@ def remap(cromosoma, posicion, mapeo):
         for segmento in mapeo[cromosoma]:
             if posicion >= segmento['inicio'] and posicion <= segmento['fin']:
 
-                gap = segmento["gap"].split(sep=' ')
+                gap = segmento["gap"]
 
-                # This should be a function returning shift. ###############
-                shift = 0
-                limit = 0
-                for tramo in gap:
-                    if limit <= (posicion - segmento['inicio']):
-                        if tramo.startswith('M') or tramo.startswith('D'):
-                            limit = limit + int(tramo[1:])
+                shift = calcular_shift(gap,posicion-segmento['inicio'])
 
-                            if tramo.startswith('D'):
-                                shift = shift - int(tramo[1:])
-
-                        elif tramo.startswith('I'):
-                            shift = shift + int(tramo[1:])
-
-                        tramo_anterior = tramo
-
-                    else:
-                        if tramo_anterior.startswith('D'):
-                            return None
-                        
-
-                ############################################################
+                if shift == None:
+                    return None
 
                 desplazamiento = posicion - segmento['inicio'] + shift
                 posicion_final = segmento['destino']['inicio'] + desplazamiento
