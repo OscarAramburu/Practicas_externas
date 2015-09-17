@@ -48,7 +48,14 @@ def parse_line(data):
 
 
 def calcular_shift(gap, despl):
-    """Calcula el desplazamiento con inserciones y deleciones."""
+    """Calcula el desplazamiento con inserciones y deleciones.
+
+    >>> calcular_shift('M5585 D1 M1503 I1 M2', 6000)
+    -1
+    >>> calcular_shift('M5585 D1 M1503 I1 M2 ',5586)
+    None
+
+    """
 
     shift = 0
     limit = 0
@@ -57,13 +64,13 @@ def calcular_shift(gap, despl):
 
         if limit <= despl:
             if tramo.startswith('M') or tramo.startswith('D'):
-                limit = limit + int(tramo[1:])
+                limit += int(tramo[1:])
 
                 if tramo.startswith('D'):
-                    shift = shift - int(tramo[1:])
+                    shift -= int(tramo[1:])
 
             elif tramo.startswith('I'):
-                shift = shift + int(tramo[1:])
+                shift += int(tramo[1:])
 
             tramo_anterior = tramo
 
@@ -75,7 +82,22 @@ def calcular_shift(gap, despl):
 
 
 def remap(cromosoma, posicion, mapeo):
-    """Devuelve la posicion de mapeo para cromosoma y posicion."""
+    """Devuelve la posicion de mapeo para cromosoma y posicion.
+    
+    >>> remap("NT_187509.1", 4000, {
+    ...       'NT_187509.1': [{
+    ...       'ident': "NT_187509.1",
+    ...       'inicio': 3463,
+    ...       'fin': 10794,
+    ...       'direccion': "+",
+    ...       'gap': 'M62 D47 M3126 I4 M725 D1 M3371',
+    ...       'destino': {'identificador': 'NT_113885.1',
+    ...                   'inicio': 68285,
+    ...                   'fin': 75572,
+    ...                   'direccion': '+'}}]})
+    ('NT_113885.1', 68775)
+    
+    """
 
     if cromosoma in mapeo:
         for segmento in mapeo[cromosoma]:
@@ -117,4 +139,3 @@ if __name__ == "__main__":
                 if not ident in MAPEO:
                     MAPEO[ident] = []
                     MAPEO[ident].append(posiciones)
-#Test
