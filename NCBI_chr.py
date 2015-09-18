@@ -11,6 +11,4 @@ def genbankid_to_chromosome(ident):
     for records in GenBankIterator(handle):
         chromosome = records.features[0].qualifiers['chromosome'][0]
 
-
     return chromosome
-#tets
