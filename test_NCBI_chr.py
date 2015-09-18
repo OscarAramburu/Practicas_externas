@@ -5,8 +5,12 @@ from NCBI_chr import genbankid_to_chromosome
 
 
 def efetch_from_disk(id=None, db=None, retmode=None, rettype=None):
-    if os.path.isfile(os.path.join("test_files", id + ".gb")):
-        handle = open(os.path.join("test_files", id + ".gb"))
+    test_gb = os.path.join(
+        os.path.dirname(__file__),
+        "test_files",
+        id + ".gb")
+    if os.path.isfile(test_gb):
+        handle = open(test_gb)
         return handle
 
 
