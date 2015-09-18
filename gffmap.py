@@ -1,5 +1,5 @@
 """Maps a hg38 into a hg19 position."""
-
+import NCBI_chr
 
 def parse_line(data):
     """Devuelve un diccionario con los datos en data.
@@ -126,7 +126,9 @@ def remap(cromosoma, posicion, mapeo):
                 return destino
 
 if __name__ == "__main__":
+    import json
     MAPEO = {}
+    json_dump = open('mapeo.json','w')
 
     with open('GRCh37-GRCh38.gff') as grch37:
         for line in grch37:
@@ -139,3 +141,7 @@ if __name__ == "__main__":
                 if not ident in MAPEO:
                     MAPEO[ident] = []
                     MAPEO[ident].append(posiciones)
+                    #print(NCBI_chr.genbankid_to_chromosome(ident))
+
+    json.dump(MAPEO,json_dump)
+    json_dump.close()
