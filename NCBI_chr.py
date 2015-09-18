@@ -12,8 +12,7 @@ def genbankid_to_chromosome(ident):
         qualifiers = records.features[0].qualifiers
         chromosome = qualifiers['chromosome'][0]
         if 'map' in qualifiers:
-            position1 = qualifiers['map'][0]
-            position = position1.replace('unlocalized',chromosome+'-Unknown')
-            return position
+            position = qualifiers['map'][0]
+            chromosome += position.replace('unlocalized','-Unknown')
 
     return chromosome
