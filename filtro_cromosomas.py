@@ -9,9 +9,12 @@ for ident in mapeo:
     if len(nombre_chr) <3:
         cromosomas[nombre_chr] = mapeo[ident]
 
-print(cromosomas)
+
+chr = open('cromosomas.json','w')
+json.dump(cromosomas,chr)
+chr.close()
 
 #TODO: guardar el diccionario "cromosomas" en un archivo que se llame
 # cromosomas.json.
-# - SE utiliza la función 'open' para abrir el archivo.
-# - Se utiliza la función 'json.dump' para guardar un diccionario.
+# - SE utiliza la funcion 'open' para abrir el archivo.
+# - Se utiliza la funcion 'json.dump' para guardar un diccionario.
