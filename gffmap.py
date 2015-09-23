@@ -127,6 +127,8 @@ def remap(cromosoma, posicion, mapeo):
                            posicion_final)
 
                 return destino
+            else:
+                return (cromosoma, posicion)
 
 if __name__ == "__main__":
     cromosomas = json.load(open ('cromosomas.json','r'))
