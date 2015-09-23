@@ -47,6 +47,8 @@ def test_remap():
     assert remap('NT_187509.1', 3525, mapeo) is None
     # Valor mapeado en una insercion
     assert remap('NT_187509.1', 6700, mapeo) == ('NT_113885.1', 71479)
+    # Valor no remapeado
+    assert remap('NT_187509.1', 3000, mapeo) ==('NT_187509.1', 3000)
 
 
 def test_remap_reverse():
