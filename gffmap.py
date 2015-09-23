@@ -131,15 +131,18 @@ def remap(cromosoma, posicion, mapeo):
                 return (cromosoma, posicion)
 
 if __name__ == "__main__":
-    cromosomas = json.load(open ('cromosomas.json','r'))
+
+    with open('cromosomas.json','r') as f:
+        cromosomas = json.load(f)
+
     parser = argparse.ArgumentParser(description='Remapea posiciones de GRCh38 a GRCh37')
     parser.add_argument('--chr', dest='chr', action='store',
                         help='Nombre de cromosoma', required=True)
     parser.add_argument('--pos', type=int, dest='pos', action='store',
                         help='Posicion dentro del cromosoma', required=True)
     args = parser.parse_args()
-
-    if remap(args.chr,args.pos,cromosomas) == None:
+    remapeo = remap(args.chr,args.pos,cromosomas)
+    if  remapeo == None:
         sys.exit('Mapeo no encontrado')
     else:
-        print(remap(args.chr,args.pos,cromosomas))
+        print(remapeo)
