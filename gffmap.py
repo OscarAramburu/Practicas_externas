@@ -2,6 +2,7 @@
 import NCBI_chr
 import json
 import argparse
+import sys
 
 def parse_line(data):
     """Devuelve un diccionario con los datos en data.
@@ -137,6 +138,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if remap(args.chr,args.pos,cromosomas) == None:
-        print(args.chr,args.pos)
+        sys.exit('Mapeo no encontrado')
     else:
         print(remap(args.chr,args.pos,cromosomas))
